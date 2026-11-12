@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Brand tokens taken from the Lowest Price SG Mart customer app */
+@theme {
+  --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --color-brand: #0c831f;
+  --color-brand-dark: #096a18;
+  --color-brand-soft: #eaf6ec;
+  --color-ink: #111111;
+  --color-brown: #2b1717;
+  --color-muted: #666a73;
+  --color-line: #eeeeee;
+  --color-pink: #ed0870;
+  --color-pink-soft: #ffe8ef;
+  --color-price: #198f42;
+  --color-price-dark: #126b32;
+  --color-sale: #ed0039;
+  --color-blush: #fff1ef;
+  --color-blush-line: #f7dfdc;
+  --color-alert: #ef3131;
+  --color-logo-red: #c8161d;
+  --color-blue: #2f76e8;
+  --color-blue-soft: #eaf2ff;
+  --color-canvas: #f4f6fb;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  @apply bg-white text-ink font-sans antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.title-underline::after { content: none; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.price-tag {
+  @apply inline-flex items-center rounded-lg border border-price-dark bg-price px-2 py-0.5 font-extrabold text-white;
+  box-shadow: 2px 2px 0 var(--color-price-dark);
+}
+.add-btn {
+  @apply flex items-center justify-center rounded-lg border border-brand bg-[#f7fff9] font-extrabold text-brand transition;
+}
+.add-btn:hover { @apply bg-brand text-white; }
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 font-bold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-50;
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-5 py-3 font-bold text-ink transition hover:border-brand hover:text-brand;
+}
+.card { @apply rounded-2xl border border-line bg-white; }
+.input {
+  @apply w-full rounded-xl border border-line bg-[#f7f7f7] px-4 py-3 text-[15px] outline-none transition focus:border-brand focus:bg-white;
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.animate-rise { animation: rise .25s ease-out both; }

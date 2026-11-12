@@ -1,0 +1,11 @@
+import { createClient } from '@supabase/supabase-js';
+
+const url = import.meta.env.VITE_SUPABASE_URL;
+const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+if (!url || !key) throw new Error('Missing VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY in .env');
+
+// Same Supabase project as the customer app. The session is kept in localStorage.
+export const supabase = createClient(url, key, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
+});
