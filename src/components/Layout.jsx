@@ -186,21 +186,14 @@ function Header({ onOpenCart }) {
 }
 
 function Footer() {
-  const { catalogue } = useShop();
   return (
     <footer className="mt-16 border-t border-line bg-white pb-28 pt-12 md:pb-12">
       <div className="mx-auto max-w-[1280px] px-4">
-        <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
+        <div className="max-w-md">
           <div>
             <h4 className="text-lg font-extrabold">Useful links</h4>
             <ul className="mt-4 grid grid-cols-2 gap-y-2.5 text-sm text-[#666]">
               {[['/offers', 'Offers'], ['/orders', 'My orders'], ['/wishlist', 'Wishlist'], ['/account', 'Loyalty points'], ['/categories', 'All categories'], ['/terms', 'Terms & privacy']].map(([to, l]) => <li key={to}><Link to={to} className="hover:text-ink">{l}</Link></li>)}
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-extrabold">Categories <Link to="/categories" className="ml-2 text-sm font-bold text-brand">see all</Link></h4>
-            <ul className="mt-4 grid grid-cols-2 gap-y-2.5 text-sm text-[#666] sm:grid-cols-3">
-              {catalogue.categories.slice(0, 15).map((c) => <li key={c.id}><Link to={`/category/${c.id}`} className="hover:text-ink">{c.name}</Link></li>)}
             </ul>
           </div>
         </div>

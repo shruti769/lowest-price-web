@@ -43,7 +43,7 @@ export default function Login() {
 
   const verify = async (e) => {
     e.preventDefault();
-    if (!/^\d{4,8}$/.test(code)) return setError('Enter the code we sent you.');
+    if (!/^\d{6}$/.test(code)) return setError('Enter the full 6-digit code.');
     setBusy(true); setError('');
     try {
       const session = await verifyPhoneOtp(authPhone, code);
@@ -112,7 +112,7 @@ export default function Login() {
             <p className="text-xs font-bold uppercase tracking-wider text-brand">Verify your number</p>
             <h1 className="mt-2 text-4xl font-extrabold">Enter code<span className="text-brand">.</span></h1>
             <p className="mt-2 text-muted">We sent a code by SMS to <b className="text-ink">{authPhone}</b>.</p>
-            <input ref={codeRef} inputMode="numeric" autoComplete="one-time-code" value={code} onChange={(e) => { setCode(e.target.value.replace(/\D/g, '').slice(0, 8)); setError(''); }} placeholder="••••••" className="input mt-8 h-16 text-center text-3xl font-extrabold tracking-[0.5em]" />
+            <input ref={codeRef} inputMode="numeric" autoComplete="one-time-code" value={code} onChange={(e) => { setCode(e.target.value.replace(/\D/g, '').slice(0, 6)); setError(''); }} placeholder="••••••" maxLength={6} className="input mt-8 h-16 text-center text-3xl font-extrabold tracking-[0.5em]" />
             {error && <p className="mt-3 text-sm text-[#b91c1c]">{error}</p>}
             <button disabled={busy} className="btn-primary mt-6 w-full py-3.5 text-base">{busy ? <><Loader2 size={18} className="animate-spin" /> Verifying…</> : 'Verify & continue'}</button>
             <button type="button" disabled={wait > 0 || busy} onClick={send} className="mt-4 w-full text-sm font-bold text-brand disabled:text-muted">{wait > 0 ? `Resend code in ${wait}s` : 'Resend code'}</button>
