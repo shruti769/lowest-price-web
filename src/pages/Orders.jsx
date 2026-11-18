@@ -86,6 +86,15 @@ const STATUS_COPY = {
   REFUNDED: 'Order refunded',
 };
 
+// Rider progress, mirrored onto the order by the backend when a rider is dispatched.
+const RIDER_COPY = {
+  FINDING_RIDER: '🛵 Finding a rider for your order',
+  RIDER_ASSIGNED: '🛵 Rider assigned',
+  OUT_FOR_DELIVERY: '🛵 Out for delivery',
+  RIDER_ARRIVED: '📍 Rider has arrived',
+  DELIVERED: '✅ Delivered',
+};
+
 export function OrderDetail() {
   const { id } = useParams();
   const { user, authReady, refreshWallet } = useShop();
@@ -139,6 +148,11 @@ export function OrderDetail() {
               </div>
             )}
             {cancelled && <XCircle className="mt-4 text-[#b91c1c]" size={32} />}
+            {!cancelled && RIDER_COPY[snap?.deliveryStatus] && (
+              <p className="mt-6 rounded-xl bg-brand-soft px-4 py-3 text-sm font-bold text-brand-dark">
+                {RIDER_COPY[snap.deliveryStatus]}{snap.riderName && snap.deliveryStatus !== 'FINDING_RIDER' ? ` · ${snap.riderName}` : ''}
+              </p>
+            )}
             {snap?.deliverySlot && <p className="mt-6 text-sm"><b>Delivery:</b> {snap.deliverySlot} SGT</p>}
             {snap?.deliveryAddress && <p className="mt-1 text-sm"><b>Address:</b> {snap.deliveryAddress}</p>}
             {snap?.pickup?.hubName && <p className="mt-1 text-sm"><b>Pickup:</b> {snap.pickup.hubName}</p>}
